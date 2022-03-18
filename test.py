@@ -1,7 +1,8 @@
 import numpy as np
 def preProcess(inputFileName):
         #data should be a file name
-        featurematrix = []
+        featurematrix = [] 
+        weights =[]
         with open(inputFileName, 'r') as file:
             for sentence in file:
                 temp = sentence.split()
@@ -12,9 +13,18 @@ def preProcess(inputFileName):
         
         featurematrix = np.asanyarray(featurematrix).astype(float) #100 cols and 100 rows
 
-        targetMatrix = featurematrix[:, -1] #holds the target values 1 col 100 rows
+        weights = np.asanyarray(weights)
 
-        print(targetMatrix)
+        weights = np.zeros((np.shape(np.transpose(featurematrix))), dtype=float)
+
+        targetMatrix = featurematrix[:, -1] #holds the target values 1 col 100 rows
+        print(np.shape(featurematrix))
+        print(np.shape(weights))
+        print(weights)
+
+
+
+        #print(targetMatrix)
 
 
 

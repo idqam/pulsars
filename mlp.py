@@ -18,16 +18,12 @@ class MLP:
 
         layers = [] #number of layers we are working with 
 
-        self.weights = [] #list of weight matrices 
-        
-        for n in range(len(layers) - 1 ):
-            w = np.zeros(layers[n], layers[n+1] ); #creates a matrix filled with zeros
-            self.weights.append(w)
-
+       
 
 
     def preProcess(self, inputFileName):
         featurematrix = []
+        weights = []
         with open(inputFileName, 'r') as file:
             for sentence in file:
                 temp = sentence.split()
@@ -37,9 +33,12 @@ class MLP:
         featurematrix = np.asanyarray(featurematrix).astype(float) #holds the initial input values
 
         targetMatrix = featurematrix[:, -1] #holds the target values 
+        weights = np.asanyarray(weights)
+
+        weights = np.zeros((np.shape(np.transpose(featurematrix))), dtype=float)
 
 
-        return featurematrix, targetMatrix
+        return featurematrix, targetMatrix, weights
     
 
     def feedForward(self, inputs):
