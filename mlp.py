@@ -16,7 +16,7 @@ class MLP:
         self.hiddenLayer = hiddenLayers
      
 
-        layers = [100,100] #number of layers we are working with 
+        layers = [] #number of layers we are working with 
 
         self.weights = [] #list of weight matrices 
         
@@ -26,18 +26,18 @@ class MLP:
 
 
 
-    def preProcess(self, inputData):
-        #data should be a file name
-        nameofFile = input("Enter the name of the file: ")
-        file = open(inputData, 'r')
-        inputsList = []
-        for line in file:
-            tempArr = line.split()
-            inputsList.append(tempArr)
-        
-        featurematrix = np.asanyarray(inputsList).astype(float)
+    def preProcess(self, inputFileName):
+        featurematrix = []
+        with open(inputFileName, 'r') as file:
+            for sentence in file:
+                temp = sentence.split()
+                featurematrix.append(temp)
 
-        targetMatrix = np.delete(featurematrix, [0,1,2], 1) #holds the target values
+        
+        featurematrix = np.asanyarray(featurematrix).astype(float) #holds the initial input values
+
+        targetMatrix = featurematrix[:, -1] #holds the target values 
+
 
         return featurematrix, targetMatrix
     
