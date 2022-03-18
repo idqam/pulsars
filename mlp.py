@@ -41,10 +41,10 @@ class MLP:
         return featurematrix, targetMatrix, weights
     
 
-    def feedForward(self, inputs):
+    def feedForward(self, inputs, weights):
         x = inputs
 
-        for weight in self.weights:
+        for weight in weights:
             total_input = np.dot(x, weight)
 
             x = self.tanh(total_input)
